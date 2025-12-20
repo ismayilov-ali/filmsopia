@@ -8,15 +8,15 @@
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
-        <div class="post-container">
-            <h1>
-                {{ post.title }}
-            </h1>
-        </div>
-        <div class="post-content">
-            <p>
-                {{ post.content }}
-            </p>
+        <div>
+            <h1>salam</h1
+            {%if posts%}>
+            <div>
+                {%for post in posts %}
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content }}</p>
+                {% endfor %}
+            </div>
         </div>
     </body>
 </html>

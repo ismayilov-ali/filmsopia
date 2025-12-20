@@ -13,3 +13,10 @@ def posts_page(request):
 def post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     return render(request, 'post.html', {'slug': slug})
+
+def post_list(request):
+    posts = Post.objects.all()
+    context = {
+        'posts': posts
+    }
+    return render(request, 'post_list.html', {'posts': posts})
