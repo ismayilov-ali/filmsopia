@@ -1,16 +1,6 @@
-/* ========================================
-   POST DETAIL SƏHİFƏSİ STİLLƏRİ
-   ======================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #ea6666 0%, #a24b4b 100%);
     min-height: 100vh;
     padding: 40px 20px;
 }
@@ -19,40 +9,6 @@ body {
     max-width: 900px;
     margin: 0 auto;
 }
-
-/* Geri qayıt düyməsi */
-.back-button {
-    margin-bottom: 30px;
-}
-
-.btn-back {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.btn-back:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateX(-5px);
-}
-
-/* Post kartı */
-.post-detail {
-    background: white;
-    border-radius: 20px;
-    padding: 50px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    margin-bottom: 30px;
-}
-
-/* Post başlığı */
 .post-header {
     border-bottom: 3px solid #667eea;
     padding-bottom: 25px;
@@ -166,30 +122,8 @@ body {
     font-size: 1.05em;
 }
 
-/* Responsive dizayn */
-@media (max-width: 768px) {
-    .post-detail {
-        padding: 30px 25px;
-    }
-    
-    .post-title {
-        font-size: 1.8em;
-    }
-    
-    .post-content {
-        font-size: 1.05em;
-    }
-    
-    .post-navigation {
-        grid-template-columns: 1fr;
-    }
-    
-    .post-meta {
-        gap: 10px;
-    }
-    
-    .meta-item {
-        font-size: 0.85em;
-        padding: 6px 12px;
-    }
-}
+  .post-banner {
+      width: 100% !important;
+      height: 300px !important;
+      object-fit: cover !important;
+  }

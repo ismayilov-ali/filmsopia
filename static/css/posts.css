@@ -203,7 +203,6 @@ body {
     box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
 }
 
-/* Responsive dizayn */
 @media (max-width: 768px) {
     .posts-grid {
         grid-template-columns: 1fr;

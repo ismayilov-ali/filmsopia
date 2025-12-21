@@ -6,10 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ post.title }} - Blog</title>
     <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+<style>
+  .post-banner {
+      width: 400px !important;
+      height: 600px !important;
+      object-fit: cover !important;
+  }
+</style>
 </head>
 <body>
     <div class="container"> <article class="post-detail">
             <header class="post-header">
+                <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="post-banner">
                 <h1 class="post-title">{{ post.title }}</h1>
             </header>
             <div class="post-content">
