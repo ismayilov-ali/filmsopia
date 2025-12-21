@@ -10,27 +10,15 @@ def blog_page(request):
 def posts_page(request):
     return render(request, 'posts_page.html')
 
-def post(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    return render(request, 'post.html', {'slug': slug})
+def post(request, id):
+    post = get_object_or_404(Post, id=id)
+    return render(request, 'post_detail.html', {'post': post})
 
 def post_list(request):
     posts = Post.objects.all()
-    context = {
-        'posts': posts
-    }
     return render(request, 'post_list.html', {'posts': posts})
 
-def post_detail(request, pk):
-    """Bir postun tam detalını göstərir"""
-    post = get_object_or_404(Post, pk=pk)
-    
-    previous_post = Post.objects.filter(pk__lt=post.pk).order_by('-pk').first()
-    next_post = Post.objects.filter(pk__gt=post.pk).order_by('pk').first()
-    
-    context = {
-        'post': post,
-        'previous_post': previous_post,
-        'next_post': next_post,
-    }
-    return render(request, 'post_detail.html', context)
+def post_detail(request, id):
+    post = get_object_or_404(Post, id=id)
+
+    return render(request, 'post_detail.html', {'post': post})

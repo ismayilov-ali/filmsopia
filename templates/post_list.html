@@ -35,7 +35,7 @@
                             <span class="char-count">
                                 {{ post.content|length }} simvol
                             </span>
-                            <a href="{% url 'blog:post_detail' post.pk %}" class="read-more">Daha çox oxu →</a>
+                            <a href="{% url 'blog:post_detail' post.id %}" class="read-more">Daha çox oxu →</a>
                         </div>
                     </div>
                 {% endfor %}
