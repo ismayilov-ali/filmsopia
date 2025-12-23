@@ -1,80 +1,115 @@
+/* ========================================
+   ÜMUMİ QUTU (BOX) DİZAYNI
+   ======================================== */
+
 :root {
-    --primary-color: #212D40;  /* Floral White*/
-    --secondary-color: #5E6778; /* Bone*/
-    --accent-color: #252422; /*Eerie Black*/
-    --text-color: #c5c6c8;     /*Dark Charcoal*/
-    --triple-color: #7A5DB6; /*Princeton Orange*/
+    --bright-green: #00E054;
+    --vibrant-orange: #FF8000;
+    --light-blue: #40BCF4;
+    --charcoal-black: #14181C;
+    --dark-grey-blue: #1A2028;
+    --border-grey: #2C3440;
+    --silver-text: #99AABB;
+    --white: #FFFFFF;
 }
+
 body {
-    background: linear-gradient(135deg, #667eea 0%, #82a24b 100%);
+    background-color: var(--charcoal-black); /* Əsas ümumi fon */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;    
-    font-family: Arial, sans-serif;
     min-height: 100vh;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--silver-text);
 }
 
 .boxconteiner {
     display: flex;          
     flex-direction: row;    
-    gap: 20px;              
+    gap: 30px;              
     justify-content: center;
-    flex-wrap: wrap;        
+    flex-wrap: wrap;
+    padding: 40px;
 }
 
 .box {
-    background: #2524223a;
-    padding: 30px;  
-    border-radius: 50px;
-    height: 300px;
+    background: var(--dark-grey-blue); /* Kontent bloklarının fonu */
+    padding: 40px;  
+    border-radius: 20px; /* Həddindən artıq dairəvi (50px) yerinə daha müasir 20px */
+    border: 1px solid var(--border-grey); /* Sərhəd bozu */
+    height: auto; /* Mətnə görə tənzimlənən hündürlük */
     width: 350px;         
     text-align: center;
-    transition: transform 0.3s ease;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    position: relative;
 }
 
 .box:hover {
     transform: translateY(-10px);
+    border-color: var(--bright-green); /* Hover zamanı göy çərçivə */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
 }
 
-h1{
-    color: var(--text-color);
+/* Kartın içindəki başlıqlar */
+h1 {
+    color: var(--white);
     margin: 10px 0;
-    font-size: 30px;
-}
-h2{
-    color: var(--text-color);
-    margin: 10px 0;
-    font-size: 50px;
-}
-p{
-    color: var(--text-color);
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 600;
 }
 
-a {
-    color: var(--text-color);
-    font-size: 50px;
-    text-decoration: none;
+h2 {
+    color: var(--vibrant-orange); /* Diqqət çəkən element üçün narıncı */
+    margin: 15px 0;
+    font-size: 40px;
 }
+
+p {
+    color: var(--silver-text);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Düymə Stili (Fruit-btn) */
 .fruit-btn {
-    display: inline-block;   
-    text-decoration: none;    
-    padding: 15px 40px;       
-    font-size: 40px;          
-    
-    background: rgba(227, 222, 237, 0.226);
-    
-    border-radius: 20px;      
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
-    transition: all 0.3s ease; 
+    display: inline-block;
+    background-color: transparent;
+    color: var(--bright-green);
+    text-decoration: none;
+    padding: 12px 12px;
+    border: 2px solid var(--bright-green);
+    border-radius: 6px;
+    font-weight: 600;
+    width: 120px;
+    height: 30px;
+    text-align: center;
 }
 
 .fruit-btn:hover {
-    transform: scale(1.1);    
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    filter: brightness(1.1);  
+    transform: scale(1.05);    
+    background: var(--white); /* Hover olduqda ağ rəngə keçid */
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Keçid linkləri */
+a {
+    color: var(--light-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--white);
+}
+
+/* Mobil Uyğunluq */
+@media (max-width: 600px) {
+    .box {
+        width: 100%;
+        max-width: 320px;
+    }
 }

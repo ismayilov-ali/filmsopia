@@ -8,6 +8,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True)
+    link = models.URLField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.title

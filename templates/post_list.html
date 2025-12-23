@@ -14,7 +14,7 @@
             <p>Ən son paylaşımlarımız</p>
             {% if posts %}
                 <div class="posts-count">
-                    Cəmi {{ posts|length }} məqalə
+                    Total {{ posts|length }} film
                 </div>
             {% endif %}
         </div>
@@ -25,17 +25,21 @@
                     <div class="post-card">
                         <div class="post-number">#{{ forloop.counter }}</div>
                         
-                        <h2 class="post-title">{{ post.title }}</h2>
-                        
-                        <div class="post-content">
-                            {{ post.content|truncatechars:38 }}
-                        </div>
-                        
-                        <div class="post-stats">
-                            <span class="char-count">
-                                {{ post.content|length }} simvol
-                            </span>
-                            <a href="{% url 'blog:post_detail' post.id %}" class="read-more">Daha çox oxu →</a>
+                        <div class="post-body"> <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="post-image">
+                            
+                            <div class="post-info"> <h2 class="post-title">{{ post.title }}</h2>
+                                
+                                <div class="post-content">
+                                    {{ post.content|truncatechars:38 }}
+                                </div>
+                                
+                                <div class="post-stats">
+                                    <span class="char-count">
+                                        {{ post.content|length }} simvol
+                                    </span>
+                                    <a href="{% url 'blog:post_detail' post.id %}" class="read-more">Daha çox oxu →</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

@@ -6,25 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ post.title }} - Blog</title>
     <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
-<style>
-  .post-banner {
-      width: 400px !important;
-      height: 600px !important;
-      object-fit: cover !important;
-  }
-</style>
 </head>
 <body>
-    <div class="container"> <article class="post-detail">
+    <a href="{% url 'blog:post_list' %}" class="back-button">← Geri</a>
+    <main class="container">
+        <article class="post-card">
             <header class="post-header">
-                <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="post-banner">
-                <h1 class="post-title">{{ post.title }}</h1>
+                <div class="banner-wrapper">
+                    <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="post-banner">
+                    <span class="status-badge">{% if post.is_watched %}İzlənilib{% endif %}</span>
+                </div>
             </header>
-            <div class="post-content">
-                {{ post.content|linebreaks }}
-            </div>
 
+            <section class="post-body">
+                <h1 class="post-title">{{ post.title }}</h1>
+                
+                <div class="post-content">
+                    {{ post.content|linebreaks }}
+                </div>
+
+                <footer class="post-footer">
+                    <a href="{{ post.link }}" class="cta-button" target="_blank">
+                        İzləmək üçün buraya klikləyin
+                    </a>
+                </footer>
+            </section>
         </article>
-    </div>
+    </main>
 </body>
 </html>

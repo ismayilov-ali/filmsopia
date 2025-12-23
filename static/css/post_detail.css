@@ -1,129 +1,159 @@
+/* Rəng Paleti və Dəyişənlər */
+:root {
+    --bright-green: #00E054;
+    --vibrant-orange: #FF8000;
+    --light-blue: #40BCF4;
+    --charcoal-black: #14181C;
+    --dark-grey-blue: #1A2028;
+    --border-grey: #2C3440;
+    --silver-text: #99AABB;
+    --white: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #ea6666 0%, #a24b4b 100%);
-    min-height: 100vh;
+    background-color: var(--charcoal-black);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--silver-text);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
     padding: 40px 20px;
 }
 
 .container {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 1000px;
+    width: 100%;
 }
+
+/* Əsas Kart Stili */
+.post-card {
+    background-color: var(--dark-grey-blue);
+    border: 1px solid var(--border-grey);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex; 
+    align-items: stretch;
+}
+
+.banner-wrapper {
+    position: relative;
+    width: 40%;
+    height: 40%; /
+}
+
 .post-header {
-    border-bottom: 3px solid #667eea;
-    padding-bottom: 25px;
-    margin-bottom: 30px;
+    flex: 0 0 40%; 
+    max-width: 400px;
+}
+
+.banner-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.post-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+.post-body {
+    padding: 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.status-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--bright-green);
+    color: var(--charcoal-black);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 10px rgba(0, 224, 84, 0.3);
+}
+
+/* Yazı Hissəsi */
+.post-body {
+    padding: 40px;
 }
 
 .post-title {
-    color: #2c3e50;
-    font-size: 2.5em;
-    line-height: 1.3;
+    color: var(--white);
+    font-size: 2.2rem;
     margin-bottom: 20px;
-    font-weight: 700;
+    line-height: 1.2;
 }
 
-.post-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    color: #7f8c8d;
-    font-size: 0.95em;
-}
-
-.meta-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 8px 15px;
-    background: #f8f9fa;
-    border-radius: 20px;
-}
-
-/* Post məzmunu */
 .post-content {
-    color: #2c3e50;
-    font-size: 1.15em;
-    line-height: 1.9;
-    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: var(--silver-text);
+    margin-bottom: 30px;
+    text-align: justify;
 }
 
-.post-content p {
-    margin-bottom: 20px;
-}
-
-/* Post footer */
-.post-footer {
-    border-top: 2px solid #ecf0f1;
-    padding-top: 25px;
-    margin-top: 40px;
-}
-
-.post-info {
-    color: #7f8c8d;
-    font-size: 0.95em;
-}
-
-.post-info p {
-    margin-bottom: 8px;
-}
-
-.post-info strong {
-    color: #2c3e50;
-}
-
-/* Naviqasiya */
-.post-navigation {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.nav-link {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
+/* Link (Düymə) Stili */
+.cta-button {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--bright-green);
     text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    border: 2px solid transparent;
-}
-
-.nav-link:hover:not(.disabled) {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    border-color: #667eea;
-}
-
-.nav-link.prev {
-    text-align: left;
-}
-
-.nav-link.next {
-    text-align: right;
-}
-
-.nav-link.disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
-
-.nav-label {
-    color: #667eea;
+    padding: 12px 24px;
+    border: 2px solid var(--bright-green);
+    border-radius: 6px;
     font-weight: 600;
-    font-size: 0.9em;
+    transition: all 0.3s ease;
 }
 
-.nav-title {
-    color: #2c3e50;
-    font-size: 1.05em;
+.cta-button:hover {
+    background-color: var(--bright-green);
+    color: var(--charcoal-black);
+    box-shadow: 0 0 15px rgba(64, 188, 244, 0.4);
 }
+.back-button {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--bright-green);
+    text-decoration: none;
+    padding: 12px 12px;
+    border: 2px solid var(--bright-green);
+    border-radius: 6px;
+    font-weight: 600;
+    width: 120px;
+    height: 60px;
+    text-align: center;
+}
+.back-button:hover {
+    transform: scale(1.05);    
+    background: var(--bright-green);
+    color: var(--charcoal-black);
+    box-shadow: 0 6px 20px rgba(64, 188, 244, 0.4);
+}
+/* Mobil Uyğunluq */
+@media (max-width: 768px) {
+    .post-card {
+        flex-direction: column; /* Mobil ekranlarda yenidən alt-alta olur */
+    }
+    
+    .post-header {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 100%;
+    }
 
-  .post-banner {
-      width: 100% !important;
-      height: 300px !important;
-      object-fit: cover !important;
-  }
+    .banner-wrapper {
+        height: 250px; /* Mobil üçün şəklin hündürlüyü */
+    }
+}
