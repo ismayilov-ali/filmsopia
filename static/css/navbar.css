@@ -1,0 +1,107 @@
+:root {
+    --bright-green: #00E054;
+    --vibrant-orange: #FF8000;
+    --light-blue: #40BCF4;
+    --charcoal-black: #14181C;
+    --dark-grey-blue: #1A2028;
+    --border-grey: #2C3440;
+    --silver-text: #99AABB;
+    --white: #FFFFFF;
+}
+
+.navbar {
+    background-color: var(--dark-grey-blue);
+    border-bottom: 1px solid var(--border-grey);
+    color: var(--silver-text);
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    height: 100%;
+    min-height: 60px;
+}
+
+.navbar-brand a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Graphik", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand a:hover {
+    color: var(--bright-green);
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 10px;
+}
+
+.navbar-menu li {
+    margin: 0;
+}
+
+.navbar-menu a {
+    color: var(--silver-text);
+    text-decoration: none;
+    padding: 10px 18px;
+    display: block;
+    border-radius: 6px;
+    font-weight: 600;
+    font-family: "Graphik", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.navbar-menu a:hover {
+    background-color: rgba(0, 224, 84, 0.1);
+    color: var(--bright-green);
+    border-color: var(--bright-green);
+    transform: translateY(-2px);
+}
+
+.navbar-menu a:active {
+    transform: translateY(0);
+}
+
+body {
+    padding-top: 76px;
+    margin: 0;
+    background-color: var(--charcoal-black);
+    font-family: "Graphik", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+
+    .navbar-menu {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .navbar-menu li {
+        flex: 0 0 auto;
+    }
+}

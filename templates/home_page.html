@@ -1,21 +1,29 @@
-{% load static %} <!DOCTYPE html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="az">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    
     <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
-
 <body>
-    <h1 class="title">salam</h1>    
-    <div class="boxconteiner">
-        <div class="box">
-            <h1>Butun postlar</h1>
-            <p>Postlari gor.</p>
-            <a href="http://127.0.0.1:8000/posts/"class="post-button">Postlar</a>
-
-    </div>
+    {% include 'navbar.html' %}
+    
+    <main class="container">
+        {% for item in hometext %}
+        <article class="content-card">
+            <div class="card-inner">
+                <header class="card-header">
+                    <h1 class="card-title">{{ item.title }}</h1>
+                </header>
+                <section class="card-body">
+                    <p class="card-content">{{ item.content }}</p>
+                </section>
+            </div>
+        </article>
+        {% endfor %}
+    </main>
 </body>
 </html>

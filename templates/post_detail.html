@@ -6,15 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ post.title }} - Blog</title>
     <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <a href="{% url 'blog:post_list' %}" class="back-button">← Geri</a>
+    <div>   
+        {% include 'navbar.html' %}
+    </div>
+
     <main class="container">
         <article class="post-card">
             <header class="post-header">
                 <div class="banner-wrapper">
                     <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" class="post-banner">
-                    <span class="status-badge">{% if post.is_watched %}İzlənilib{% endif %}</span>
                 </div>
             </header>
 
@@ -25,12 +29,97 @@
                 </div>
 
                 <footer class="post-footer">
-                    <a href="{{ post.link }}" class="cta-button" target="_blank">
+                    <div class="interaction-container" style="display: flex; gap: 15px; width: 100%; align-items: center;">
+                        {% if user.is_authenticated %}
+                        <div class="like-section">
+                            <form method="post" action="{% url 'blog:like_post' post.id %}" class="like-form">
+                                {% csrf_token %}
+                                    <button type="submit" class="like-btn" data-liked="{{ user_has_liked|yesno:'true,false' }}">
+                                        {% if user_has_liked %}
+                                            <i class="fas fa-heart"></i> {% else %}
+                                            <i class="far fa-heart"></i> {% endif %}
+                                    </button>
+                            </form>
+                            <span class="like-count">{{ post.likes.count }} Like</span>
+                        </div>
+                        <div class="favorite-section">
+                            <form method="post" action="{% url 'blog:favorite_post' post.id %}" class="favorite-form">
+                                {% csrf_token %}
+                                    <button type="submit" class="fav-btn" data-favorited="{{ user_has_favorited|yesno:'true,false' }}">
+                                        {% if user_has_favorited %}
+                                            <i class="fas fa-star"></i> {% else %}
+                                            <i class="far fa-star"></i> {% endif %}
+                                    </button>
+                            </form>
+                            <span class="favorite-count">{{ post.favorites.count }} Favorites</span>
+                        </div>
+                        {% else %}
+                        <div class="like-section">
+                            <a href="{% url 'admin:login' %}?next={{ request.path }}" class="login-prompt">Bəyənmək üçün daxil olun</a>
+                            <span class="like-count">{{ post.likes.count }} Like</span>
+                        </div>
+                        <div class="favorite-section">
+                            <a href="{% url 'admin:login' %}?next={{ request.path }}" class="login-prompt">Favorite üçün daxil olun</a>
+                            <span class="favorite-count">{{ post.favorites.count }} fav</span>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <a href="{{ post.link }}" class="cta-button" target="_blank" style="width: 100%; text-align: center; margin-top: 10px;">
                         İzləmək üçün buraya klikləyin
                     </a>
                 </footer>
             </section>
         </article>
     </main>
+
+<script>
+const likeForm = document.querySelector('.like-form');
+if (likeForm) {
+    likeForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('.like-btn');
+        btn.classList.add('liked');
+        
+        fetch(this.action, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': this.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            btn.innerHTML = data.liked ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+            btn.dataset.liked = data.liked;
+            document.querySelector('.like-count').textContent = data.total_likes + ' Like';
+        });
+    });
+}
+
+const favForm = document.querySelector('.favorite-form');
+if (favForm) {
+    favForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('.fav-btn');
+        btn.classList.add('favorited');
+        
+        fetch(this.action, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': this.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            btn.innerHTML = data.favorited ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+            btn.dataset.favorited = data.favorited;
+            document.querySelector('.favorite-count').textContent = data.total_favorites + ' Favorites';
+        });
+    });
+}
+</script>
+
 </body>
 </html>

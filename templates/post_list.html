@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Postları</title>
     <link rel="stylesheet" href="{% static 'css/post_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 <body>
+    <div>  
+    {% include 'navbar.html' %}
+</div>
     <div class="container">
         <div class="header">
-            <a href="{% url 'blog:home_page' %}" class="back-button">← Ana Səhifə</a>
             <h1>📝 Blog Postları</h1>
             <p>Ən son paylaşımlarımız</p>
             {% if posts %}
