@@ -14,14 +14,5 @@ Filmsopia, istifadəçilərin geniş film bazasında axtarış edə biləcəyi, 
 
 Bu layihə aşağıdakı texnologiyalar istifadə olunaraq hazırlanmışdır:
 
-- **Frontend:** HTML5, CSS3, JavaScript (və ya istifadə etdiyiniz framework: React/Vue)
-- **API:** [TMDB API](https://www.themoviedb.org/documentation/api) (və ya hansısa digər film API-si)
+- **Frontend:** HTML5, CSS3, JavaScript (framework: Django)
 - **Dizayn:** Modern UI/UX prinsipləri
-
-## 📦 Quraşdırılma
-
-Layihəni öz kompüterinizdə işə salmaq üçün aşağıdakı addımları izləyin:
-
-1. **Repozitoriyanı klonlayın:**
-   ```bash
-   git clone [https://github.com/ismayilovali0/filmsopia.git](https://github.com/ismayilovali0/filmsopia.git)

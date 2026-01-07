@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Like, Favorite, Hometext
+from .models import Post, Like, Favorite, Hometext, Comment
 
 
 @admin.register(Post)
@@ -22,3 +22,13 @@ class home_pageAdmin(admin.ModelAdmin):
     list_display = ('title', 'content')
     list_filter = ('title',)
     ordering = ('title',)
+
+@admin.register(Comment)
+class commentAdmin(admin.ModelAdmin):
+    search_fields = ('user', 'content')
+    list_display = ('user', 'content')
+
+    """
+    list_filter = ('title',)
+    ordering = ('title',)
+    """

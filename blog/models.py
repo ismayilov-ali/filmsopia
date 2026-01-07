@@ -43,4 +43,8 @@ class Favorite(models.Model):
 
     def __str__(self):
         return f'{self.user.username} favorited {self.post.title}'
-    
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()

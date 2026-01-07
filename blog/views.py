@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import Post, Like, Favorite, Hometext
+from .models import Post, Like, Favorite, Hometext, Comment
 
 
 def blog_page(request):
@@ -52,6 +52,21 @@ def post_detail(request, id):
         'user_has_liked': user_has_liked,
     }
     return render(request, 'post_detail.html', context)
+
+@login_required
+def comment_post(request, post_id):
+    if request.method == 'POST':
+        post = get_object_or_404(Post, id=post_id)
+        content = request.POST.get('content')
+        
+        if content and content.strip():
+            Comment.objects.create(
+                post=post,
+                user=request.user,
+                content=content.strip()
+            )
+    
+    return redirect('blog:post_detail', id=post_id)
 
 @login_required
 def like_post(request, post_id):
