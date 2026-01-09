@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daxil ol - FilmPost</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    
+    <main class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <i class="fas fa-sign-in-alt auth-icon"></i>
+                <h1>Daxil ol</h1>
+                <p>Hesabınıza giriş edin</p>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <i class="fas fa-info-circle"></i>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">
+                        <i class="fas fa-user"></i> İstifadəçi adı
+                    </label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <span class="error-message">{{ form.username.errors.0 }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">
+                        <i class="fas fa-lock"></i> Şifrə
+                    </label>
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <span class="error-message">{{ form.password.errors.0 }}</span>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="auth-submit-btn">
+                    <i class="fas fa-sign-in-alt"></i> Daxil ol
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Hesabınız yoxdur? <a href="{% url 'blog:register' %}">Qeydiyyatdan keçin</a></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

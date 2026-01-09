@@ -129,3 +129,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/admin/login/'
+# settings.py-ə əlavə edin
+
+LOGIN_URL = 'blog:login'
+LOGIN_REDIRECT_URL = 'blog:home_page'
+LOGOUT_REDIRECT_URL = 'blog:home_page'

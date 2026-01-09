@@ -6,6 +6,14 @@
         <ul class="navbar-menu">
             <li><a href="{% url 'blog:home_page' %}">Home</a></li>
             <li><a href="{% url 'blog:post_list' %}">Posts</a></li>
+            
+            {% if user.is_authenticated %}
+                <li><a href="#" class="user-greeting"><i class="fas fa-user"></i> {{ user.username }}</a></li>
+                <li><a href="{% url 'blog:logout' %}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Çıxış</a></li>
+            {% else %}
+                <li><a href="{% url 'blog:login' %}" class="login-link"><i class="fas fa-sign-in-alt"></i> Daxil ol</a></li>
+                <li><a href="{% url 'blog:register' %}" class="register-link"><i class="fas fa-user-plus"></i> Qeydiyyat</a></li>
+            {% endif %}
         </ul>
     </div>
 </nav>

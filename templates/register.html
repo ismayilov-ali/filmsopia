@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qeydiyyat - FilmPost</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    
+    <main class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <i class="fas fa-user-plus auth-icon"></i>
+                <h1>Qeydiyyat</h1>
+                <p>FilmPost-a xoş gəlmisiniz</p>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <i class="fas fa-info-circle"></i>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">
+                        <i class="fas fa-user"></i> İstifadəçi adı
+                    </label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <span class="error-message">{{ form.username.errors.0 }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <span class="error-message">{{ form.email.errors.0 }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password1.id_for_label }}">
+                        <i class="fas fa-lock"></i> Şifrə
+                    </label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <span class="error-message">{{ form.password1.errors.0 }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password2.id_for_label }}">
+                        <i class="fas fa-lock"></i> Şifrəni təsdiq edin
+                    </label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <span class="error-message">{{ form.password2.errors.0 }}</span>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="auth-submit-btn">
+                    <i class="fas fa-user-plus"></i> Qeydiyyatdan keç
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Artıq hesabınız var? <a href="{% url 'blog:login' %}">Daxil olun</a></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
