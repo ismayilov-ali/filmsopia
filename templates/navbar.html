@@ -7,5 +7,14 @@
             <li><a href="{% url 'blog:home_page' %}">Home</a></li>
             <li><a href="{% url 'blog:post_list' %}">Posts</a></li>
         </ul>
+        <ul class="navbar-menu">
+            {% if user.is_authenticated %}
+                <li>Hi, {{ user.username }}</li>
+                <li><a href="{% url 'blog:logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'blog:login' %}">Login</a></li>
+                <li><a href="{% url 'blog:signup' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
     </div>
 </nav>

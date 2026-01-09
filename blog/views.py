@@ -107,3 +107,17 @@ def favorite_post(request, post_id):
         })
     
     return redirect('blog:post_detail', id=post_id)
+
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
+def sign_up(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('blog:home_page')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})
