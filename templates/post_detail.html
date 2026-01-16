@@ -27,7 +27,7 @@
                 <div class="post-content">
                     {{ post.content|linebreaks }}
                 </div>
-
+                
                 <footer class="post-footer">
                     <div class="interaction-container" style="display: flex; gap: 15px; width: 100%; align-items: center;">
                         {% if user.is_authenticated %}
@@ -55,11 +55,11 @@
                         </div>
                         {% else %}
                         <div class="like-section">
-                            <a href="{% url 'admin:login' %}?next={{ request.path }}" class="login-prompt">Bəyənmək üçün daxil olun</a>
+                            <a href="{% url 'blog:login' %}" class="login-prompt">Bəyənmək üçün daxil olun</a>
                             <span class="like-count">{{ post.likes.count }} Like</span>
                         </div>
                         <div class="favorite-section">
-                            <a href="{% url 'admin:login' %}?next={{ request.path }}" class="login-prompt">Favorite üçün daxil olun</a>
+                            <a href="{% url 'blog:login' %}" class="login-prompt">Favorite üçün daxil olun</a>
                             <span class="favorite-count">{{ post.favorites.count }} fav</span>
                         </div>
                         {% endif %}

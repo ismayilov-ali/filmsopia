@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 def blog_page(request):
     return render(request, 'blog_page.html')
@@ -137,6 +138,8 @@ def login_view(request):
                 messages.success(request, f'Xoş gəldiniz, {username}!')
                 next_url = request.GET.get('next', 'blog:home_page')
                 return redirect(next_url)
+        else:
+            messages.error(request, 'bele bir istifadeci yoxdu!')
     else:
         form = AuthenticationForm()
     
@@ -147,3 +150,33 @@ def logout_view(request):
     logout(request)
     messages.info(request, 'Çıxış etdiniz.')
     return redirect('blog:home_page')
+
+def user_profile(request, username):
+    """İstifadəçi profil səhifəsi"""
+    profile_user = get_object_or_404(User, username=username)
+    
+    # İstifadəçinin şərhləri
+    user_comments = Comment.objects.filter(user=profile_user).select_related('post')
+    
+    # İstifadəçinin like etdiyi postlar
+    liked_posts = Post.objects.filter(likes__user=profile_user).distinct()
+    
+    # İstifadəçinin favorite etdiyi postlar
+    favorited_posts = Post.objects.filter(favorites__user=profile_user).distinct()
+    
+    # Statistika
+    stats = {
+        'total_comments': user_comments.count(),
+        'total_likes': liked_posts.count(),
+        'total_favorites': favorited_posts.count(),
+    }
+    
+    context = {
+        'profile_user': profile_user,
+        'user_comments': user_comments[:10],  # Son 10 şərh
+        'liked_posts': liked_posts[:6],  # Son 6 like
+        'favorited_posts': favorited_posts[:6],  # Son 6 favorite
+        'stats': stats,
+    }
+    
+    return render(request, 'user_profile.html', context)

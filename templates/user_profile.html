@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile_user.username }} - Profil</title>
+    <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    
+    <main class="profile-container">
+        <!-- Profile Header -->
+        <section class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-username">{{ profile_user.username }}</h1>
+                <p class="profile-email"><i class="fas fa-envelope"></i> {{ profile_user.email }}</p>
+                <p class="profile-joined">
+                    <i class="far fa-calendar"></i> 
+                    Qoşulma tarixi: {{ profile_user.date_joined|date:"d.m.Y" }}
+                </p>
+            </div>
+        </section>
+
+        <!-- Statistics -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <i class="fas fa-comments"></i>
+                <div class="stat-content">
+                    <span class="stat-number">{{ stats.total_comments }}</span>
+                    <span class="stat-label">Şərh</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-heart"></i>
+                <div class="stat-content">
+                    <span class="stat-number">{{ stats.total_likes }}</span>
+                    <span class="stat-label">Like</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <div class="stat-content">
+                    <span class="stat-number">{{ stats.total_favorites }}</span>
+                    <span class="stat-label">Favorite</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="comments">
+                <i class="fas fa-comments"></i> Şərhlər
+            </button>
+            <button class="tab-btn" data-tab="likes">
+                <i class="fas fa-heart"></i> Bəyəndikləri
+            </button>
+            <button class="tab-btn" data-tab="favorites">
+                <i class="fas fa-star"></i> Favoritlər
+            </button>
+        </div>
+
+        <!-- Comments Tab -->
+        <section class="tab-content active" id="comments-tab">
+            <h2 class="section-title">
+                <i class="fas fa-comments"></i> Son Şərhlər
+            </h2>
+            {% if user_comments %}
+                <div class="comments-list">
+                    {% for comment in user_comments %}
+                    <div class="comment-card">
+                        <div class="comment-header">
+                            <a href="{% url 'blog:post_detail' comment.post.id %}" class="comment-post-title">
+                                <i class="fas fa-film"></i> {{ comment.post.title }}
+                            </a>
+                            <span class="comment-date">
+                                <i class="far fa-clock"></i> {{ comment.created_at|date:"d.m.Y H:i" }}
+                            </span>
+                        </div>
+                        <div class="comment-text">
+                            {{ comment.content|truncatewords:30 }}
+                        </div>
+                        <a href="{% url 'blog:post_detail' comment.post.id %}" class="view-post-btn">
+                            Posta bax <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <i class="far fa-comments"></i>
+                    <p>Hələ heç bir şərh yazılmayıb</p>
+                </div>
+            {% endif %}
+        </section>
+
+        <!-- Likes Tab -->
+        <section class="tab-content" id="likes-tab">
+            <h2 class="section-title">
+                <i class="fas fa-heart"></i> Bəyənilən Postlar
+            </h2>
+            {% if liked_posts %}
+                <div class="posts-grid">
+                    {% for post in liked_posts %}
+                    <a href="{% url 'blog:post_detail' post.id %}" class="post-card">
+                        <div class="post-thumbnail">
+                            <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+                            <div class="post-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="post-info">
+                            <h3 class="post-title">{{ post.title }}</h3>
+                            <div class="post-stats">
+                                <span><i class="fas fa-heart"></i> {{ post.likes.count }}</span>
+                                <span><i class="fas fa-star"></i> {{ post.favorites.count }}</span>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <i class="far fa-heart"></i>
+                    <p>Hələ heç bir post bəyənilməyib</p>
+                </div>
+            {% endif %}
+        </section>
+
+        <!-- Favorites Tab -->
+        <section class="tab-content" id="favorites-tab">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i> Favorite Postlar
+            </h2>
+            {% if favorited_posts %}
+                <div class="posts-grid">
+                    {% for post in favorited_posts %}
+                    <a href="{% url 'blog:post_detail' post.id %}" class="post-card">
+                        <div class="post-thumbnail">
+                            <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+                            <div class="post-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="post-info">
+                            <h3 class="post-title">{{ post.title }}</h3>
+                            <div class="post-stats">
+                                <span><i class="fas fa-heart"></i> {{ post.likes.count }}</span>
+                                <span><i class="fas fa-star"></i> {{ post.favorites.count }}</span>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <i class="far fa-star"></i>
+                    <p>Hələ heç bir post favorite edilməyib</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <script>
+        // Tab switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabName = btn.getAttribute('data-tab');
+                
+                // Remove active class from all
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked
+                btn.classList.add('active');
+                document.getElementById(tabName + '-tab').classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
